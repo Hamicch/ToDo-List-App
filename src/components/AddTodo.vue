@@ -10,7 +10,7 @@
 
 <script>
 
-import uuid from 'uuid'
+// import {v4 as uuidv4 } from 'uuid';
 
 export default {
         name: 'AddTodo',
@@ -24,11 +24,11 @@ export default {
                 addTodo(e) {
                         e.preventDefault()
                         const newTodo = {
-                                id: uuid.v4(),
+                                // id: uuidv4(),
                                 title: this.title,
                                 completed: false
                         }
-                        // Sending emit siignal to parent
+                        // Sending emit s   ignal to parent
                         this.$emit('add-todo', newTodo)
 
                         this.title = ' ';
@@ -75,6 +75,3 @@ export default {
                 margin: 10px
         }
 </style>
-
-
-

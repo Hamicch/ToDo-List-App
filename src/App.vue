@@ -2,7 +2,7 @@
 <div class="app">
   <div class="app-box">
     <Header/>
-      <AddTodo v-bind:add-todo="addTodo"/>
+      <AddTodo v-on:add-todo="AddTodo"/>
         <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo"/>
   </div>
 </div>
@@ -15,6 +15,7 @@ import Todos from './components/Todos'
 
 import AddTodo from './components/AddTodo'
 
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -26,23 +27,7 @@ export default {
 
   data() {
     return {
-      todos: [
-          {
-            id: 1,
-            title: 'Do One',
-            completed: true
-          },
-          {
-            id: 2,
-            title: 'Do Two',
-            completed: false
-          },
-          {
-            id: 3,
-            title: 'Do Three',
-            completed: true
-          }
-      ]
+      todos: []
     }
   },
     methods: {
@@ -50,8 +35,22 @@ export default {
           this.todos = this.todos.filter(todo => todo.id !== id);
       },
       AddTodo(newTodo) {
-        this.todos = [...this.todos, newTodo]
+        const { title, completed } = newTodo;
+
+        axios.post('https://jsonplaceholder.typicode.com/todos', {
+          title,
+          completed
+        })
+       
+        .then(res => this.todos = [...this.todos, res.data])
+        .catch(err => console.log(err));
       }
+
+      },
+      created() {
+        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=2')
+                .then(res => this.todos = res. data)
+                .catch(err => console.log(err));
     }
 }
 </script>
@@ -75,9 +74,15 @@ export default {
 .app-box {
   background:  #ffffff;
   width: 450px;
+  height: 500px;
+  overflow: auto;
   padding: 50px;
   box-shadow: 0 0 20px #d8d5d560;
   border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 </style>
