@@ -2,13 +2,17 @@
         <div>
                 <header class="head">
                         <h2>TickTick</h2>
+                        <!-- <div id="nav">
+                                <router-link to="/"><button>Home</button></router-link>
+                                <router-link to="/about"><button>About</button></router-link>
+                        </div> -->
                 </header>
         </div>
 </template>
 
 <script>
 export default {
-        name: 'Header',
+
 }
 </script>
 

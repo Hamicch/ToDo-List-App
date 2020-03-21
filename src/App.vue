@@ -1,88 +1,52 @@
 <template>
-<div class="app">
-  <div class="app-box">
-    <Header/>
-      <AddTodo v-on:add-todo="AddTodo"/>
-        <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo"/>
+  <div id="app">
+    <router-view/>
   </div>
-</div>
 </template>
+
 <script>
 
-import Header from './components/layout/Header'
-
-import Todos from './components/Todos'
-
-import AddTodo from './components/AddTodo'
-
-import axios from 'axios';
-
 export default {
-  name: 'App',
-  components: {
-    Header,
-    Todos,
-    AddTodo
-  },
-
-  data() {
-    return {
-      todos: []
-    }
-  },
-    methods: {
-      deleteTodo(id) {
-          this.todos = this.todos.filter(todo => todo.id !== id);
-      },
-      AddTodo(newTodo) {
-        const { title, completed } = newTodo;
-
-        axios.post('https://jsonplaceholder.typicode.com/todos', {
-          title,
-          completed
-        })
-       
-        .then(res => this.todos = [...this.todos, res.data])
-        .catch(err => console.log(err));
-      }
-
-      },
-      created() {
-        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=2')
-                .then(res => this.todos = res. data)
-                .catch(err => console.log(err));
-    }
+  name: 'App'
 }
 </script>
 
-<style scoped>
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: rgb(219, 146, 160);
 }
 
-.app {
-  background-color: rgb(255, 255, 255);
-  display: flex;
-  justify-content: center;
-  margin-top: 100px;
+#nav {
+  line-height: 60px;
 }
 
-.app-box {
-  background:  #ffffff;
-  width: 450px;
-  height: 500px;
-  overflow: auto;
-  padding: 50px;
-  box-shadow: 0 0 20px #d8d5d560;
-  border-radius: 10px;
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+   text-decoration: none;
 }
 
-::-webkit-scrollbar {
-    display: none;
+#nav a.router-link-exact-active {
+  color: crimson;
 }
 
+button {
+  width: 60px;
+  height: 30px;
+  background-color: crimson;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: rgb(220, 20, 60, 0.9);
+}
 </style>
