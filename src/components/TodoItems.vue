@@ -50,6 +50,7 @@ export default {
         }
 
         .del {
+                float: right;
                 color: #fff;
                 background: crimson;
                 border-radius: 50%;
