@@ -2,7 +2,8 @@
         <div class="todo-item" v-bind:class="{'is-complete' :todo.completed}">
                 <input type="checkbox" v-on:change="checkComplete" class="checker">
                 <span>{{ todo.title }}</span>
-                <button class="del" @click="$emit('del-todo', todo.id)">X</button>
+                <font-awesome-icon icon="trash-alt" @click="$emit('del-todo', todo.id)" class="delete"/>
+                <!-- <button class="del" @click="$emit('del-todo', todo.id)">X</button> -->
         </div>
 </template>
 
@@ -49,7 +50,10 @@ export default {
                 margin: 0px  20px;
         }
 
-        .del {
+        .delete {
+                float: right;
+        }
+        /* .del {
                 float: right;
                 color: #fff;
                 background: crimson;
@@ -57,5 +61,5 @@ export default {
                 width: 20px;
                 height: 20px;
                 border: none;
-        }
+        } */
 </style>
